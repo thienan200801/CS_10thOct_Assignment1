@@ -7,8 +7,9 @@ namespace ConsoleApp1
 {
     internal class Program
     {
-        private static int par1, par2;
-        private static TextBox AddResult, MultiplyResult, para1, para2;
+        private static int par1;
+        private static TextBox AddResult, MultiplyResult, para1;
+        private static int[,] A, B;
 
         static void Main(string[] args)
         {
@@ -23,22 +24,13 @@ namespace ConsoleApp1
             form.StartPosition = FormStartPosition.CenterScreen;            
 
             Label mylab1 = new Label();
-            mylab1.Text = "Parameter a: ";
+            mylab1.Text = "Length: ";
             mylab1.Location = new Point(100, 30);
             mylab1.AutoSize = true;
             mylab1.Font = new Font("Calibri", 18);
             mylab1.ForeColor = Color.Green;
             mylab1.Padding = new Padding(6);
             form.Controls.Add(mylab1);
-
-            Label mylab2 = new Label();
-            mylab2.Text = "Parameter b: ";
-            mylab2.Location = new Point(100, 90);
-            mylab2.AutoSize = true;
-            mylab2.Font = new Font("Calibri", 18);
-            mylab2.ForeColor = Color.Green;
-            mylab2.Padding = new Padding(6);
-            form.Controls.Add(mylab2);
 
             para1 = new TextBox();
             para1.Text = "0";
@@ -49,17 +41,8 @@ namespace ConsoleApp1
             par1 = int.Parse(para1.Text);
             form.Controls.Add(para1);
 
-            para2 = new TextBox();
-            para2.Text = "0";
-            para2.Location = new Point(270, 98);
-            para2.AutoSize = true;
-            para2.Font = new Font("Calibri", 18);
-            para2.Size = new Size(250, 50);
-            par2 = int.Parse(para2.Text);
-            form.Controls.Add(para2);
-
             Button AddButton = new Button();
-            AddButton.Text = "a + b = ";
+            AddButton.Text = "Add";
             AddButton.Location = new Point(150, 200);
             AddButton.Size = new Size(100, 50);
             AddButton.Font = new Font("Calibri", 18);
@@ -67,7 +50,7 @@ namespace ConsoleApp1
             form.Controls.Add(AddButton);
 
             Button MultiplyButton = new Button();
-            MultiplyButton.Text = "a * b = ";
+            MultiplyButton.Text = "Multiply";
             MultiplyButton.Location = new Point(150, 300);
             MultiplyButton.Size = new Size(100, 50);
             MultiplyButton.Font = new Font("Calibri", 18);
@@ -105,21 +88,33 @@ namespace ConsoleApp1
         public static void AddFunction_Click(Object sender, EventArgs e)
         {
             par1 = int.Parse(para1.Text);
-            par2 = int.Parse(para2.Text);
-            int sum = par1 + par2;
-            AddResult.Text = sum.ToString();
+            A = new int[par1, par1];
+            Random rand = new Random();
+            for (int i = 0; i < par1; i++)
+            {
+                for (int j = 0; j < par1; j++)
+                {
+                    A[i, j] = rand.Next(10);
+                }
+            }
+            for (int i = 0; i < par1; i++)
+            {
+                for (int j = 0; j < par1; j++)
+                {
+                    Console.Write(A[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+            AddResult.Text = par1.ToString();
         }
         public static void MultiplyFunction_Click(Object sender, EventArgs e)
         {
             par1 = int.Parse(para1.Text);
-            par2 = int.Parse(para2.Text);
-            int multiply = par1 * par2;
-            MultiplyResult.Text = multiply.ToString();
+            MultiplyResult.Text = par1.ToString();
         }
         public static void Clear_Click(Object sender, EventArgs e)
         {
             para1.Text = "";
-            para2.Text = "";
         }
     }
 }
