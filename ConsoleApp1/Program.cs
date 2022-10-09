@@ -9,7 +9,7 @@ namespace ConsoleApp1
     {
         private static int par1;
         private static TextBox AddResult, MultiplyResult, para1;
-        private static int[,] A, B;
+        static MyMatrix A, B;
 
         static void Main(string[] args)
         {
@@ -88,29 +88,30 @@ namespace ConsoleApp1
         public static void AddFunction_Click(Object sender, EventArgs e)
         {
             par1 = int.Parse(para1.Text);
-            A = new int[par1, par1];
-            Random rand = new Random();
-            for (int i = 0; i < par1; i++)
-            {
-                for (int j = 0; j < par1; j++)
-                {
-                    A[i, j] = rand.Next(10);
-                }
-            }
-            for (int i = 0; i < par1; i++)
-            {
-                for (int j = 0; j < par1; j++)
-                {
-                    Console.Write(A[i, j] + "\t");
-                }
-                Console.WriteLine();
-            }
-            AddResult.Text = par1.ToString();
+            A = new MyMatrix(par1);
+            B = new MyMatrix(par1);
+
+            Console.WriteLine("A: ");
+            A.Print();
+
+            Console.WriteLine("B: ");
+            B.Print();
+
+            AddResult.Text = A.Add(B).ToString();
         }
         public static void MultiplyFunction_Click(Object sender, EventArgs e)
         {
             par1 = int.Parse(para1.Text);
-            MultiplyResult.Text = par1.ToString();
+            A = new MyMatrix(par1);
+            B = new MyMatrix(par1);
+
+            Console.WriteLine("A: ");
+            A.Print();
+
+            Console.WriteLine("B: ");
+            B.Print();
+
+            MultiplyResult.Text = A.Add(B).ToString();
         }
         public static void Clear_Click(Object sender, EventArgs e)
         {

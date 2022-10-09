@@ -8,28 +8,64 @@ namespace ConsoleApp1
     class MyMatrix
     {
         private int len;
-        private int[,] A;
+        private int[,] Arr;
         public MyMatrix(int l = 0)
         {
             this.len = l;
-            A = new int[len, len];
+            Arr = new int[len, len];
             Random rand = new Random();
             for (int i = 0; i < len; i++)
             {
                 for (int j = 0; j < len; j++)
                 {
-                    A[i, j] = rand.Next(10);
+                    Arr[i, j] = rand.Next(10);
                 }
             }
+        }
+        public void Print()
+        {
             for (int i = 0; i < len; i++)
             {
                 for (int j = 0; j < len; j++)
                 {
-                    Console.Write(A[i, j] + "\t");
+                    Console.Write(Arr[i, j] + "\t");
                 }
                 Console.WriteLine();
             }
         }
 
+        public MyMatrix Add(MyMatrix B)
+        {
+            MyMatrix Sum = new MyMatrix(this.len);
+            for (int i = 0; i < this.len; i++)
+            {
+                for (int j = 0; j < this.len; j++)
+                {
+                    Sum.Arr[i, j] += Arr[i, j] + B.Arr[i, j];
+                }
+            }
+            Console.WriteLine("S = ");
+            Sum.Print();
+            return Sum;
+        }
+
+        public MyMatrix Multiply(MyMatrix B)
+        {
+            MyMatrix result = new MyMatrix(this.len);
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    result.Arr[i, j] = 0;
+                    for (int k = 0; k < len; k++)
+                    {
+                        result.Arr[i, j] += Arr[i, k] * B.Arr[k, j];
+                    }
+                }
+            }
+            Console.WriteLine("Multiply = ");
+            result.Print();
+            return result;
+        }
     }
 }
