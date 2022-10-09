@@ -34,6 +34,21 @@ namespace ConsoleApp1
             }
         }
 
+        public string MyToString()
+        {
+            // result.Print();
+            string s = "";
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    s += this.Arr[i, j] + " ";
+                }
+                s += "\n";
+            }
+            return s;
+        }
+
         public MyMatrix Add(MyMatrix B)
         {
             MyMatrix Sum = new MyMatrix(this.len);
@@ -63,8 +78,7 @@ namespace ConsoleApp1
                     }
                 }
             }
-            Console.WriteLine("Multiply = ");
-            result.Print();
+
             return result;
         }
     }

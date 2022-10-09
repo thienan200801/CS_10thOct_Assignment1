@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace ConsoleApp1
@@ -8,7 +9,8 @@ namespace ConsoleApp1
     internal class Program
     {
         private static int par1;
-        private static TextBox AddResult, MultiplyResult, para1;
+        private static TextBox para1;
+        private static Label MultiplyResult, AddResult;
         static MyMatrix A, B;
 
         static void Main(string[] args)
@@ -57,27 +59,25 @@ namespace ConsoleApp1
             MultiplyButton.Click += new EventHandler(MultiplyFunction_Click);
             form.Controls.Add(MultiplyButton);
 
-            AddResult = new TextBox();
+            AddResult = new Label();
             AddResult.Text = "0";
             AddResult.Location = new Point(270, 206);
             AddResult.AutoSize = true;
             AddResult.Font = new Font("Calibri", 18);
             AddResult.Size = new Size(250, 50);
-            AddResult.ReadOnly = true;
-            form.Controls.Add(AddResult);
+            form.Controls.Add(AddResult);            
 
-            MultiplyResult = new TextBox();
+            MultiplyResult = new Label();
             MultiplyResult.Text = "0";
             MultiplyResult.Location = new Point(270, 306);
             MultiplyResult.AutoSize = true;
             MultiplyResult.Font = new Font("Calibri", 18);
-            MultiplyResult.Size = new Size(250, 50);
-            MultiplyResult.ReadOnly = true;          
+            MultiplyResult.Size = new Size(250, 100);
             form.Controls.Add(MultiplyResult);
 
             Button Clear = new Button();
             Clear.Text = "Clear";
-            Clear.Location = new Point(300, 380);
+            Clear.Location = new Point(300, 490);
             Clear.Size = new Size(100, 50);
             Clear.Font = new Font("Calibri", 18);
             Clear.Click += new EventHandler(Clear_Click);
@@ -97,7 +97,7 @@ namespace ConsoleApp1
             Console.WriteLine("B: ");
             B.Print();
 
-            AddResult.Text = A.Add(B).ToString();
+            AddResult.Text = A.Add(B).MyToString();
         }
         public static void MultiplyFunction_Click(Object sender, EventArgs e)
         {
@@ -111,7 +111,7 @@ namespace ConsoleApp1
             Console.WriteLine("B: ");
             B.Print();
 
-            MultiplyResult.Text = A.Add(B).ToString();
+            MultiplyResult.Text = A.Multiply(B).MyToString();
         }
         public static void Clear_Click(Object sender, EventArgs e)
         {
